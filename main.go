@@ -1,29 +1,33 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 )
 
-func sum(from,to int) int {
+// Version of package
+var Version string
+
+func sum(from, to int) int {
 	res := 0
-	for i:=from;i<=to; i++ {
+	for i := from; i <= to; i++ {
 		res += i
 	}
 
 	return res
 }
 
-
 func main() {
+	fmt.Println("version", Version)
 
-	var s1,s2 int
+	var s1, s2 int
 
 	go func() {
-		s1 = sum(1,100)
+		s1 = sum(1, 100)
 	}()
 
-	s2 = sum(1,10)
+	s2 = sum(1, 10)
 
 	time.Sleep(time.Second)
 
