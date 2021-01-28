@@ -19,7 +19,7 @@ jobs:
       run: echo APP_VERSION=$(basename ${GITHUB_REF}) >> ${GITHUB_ENV}
     - uses: wangyoucao577/go-release-action@v1.14
       with:
-        ldflags: -X "github.com/houseofprogrammer/go-gh-action/cmd/root.Version=${{ env.APP_VERSION }}" -X "github.com/houseofprogrammer/go-gh-action/main.Version=${{ env.APP_VERSION }}"
+        ldflags: "-X main.Version=${{ env.APP_VERSION }} -X cmd/root.Version==${{ env.APP_VERSION }}"
         github_token: ${{ secrets.GITHUB_TOKEN  }}
         goos: ${{ matrix.goos }}
         goarch: ${{ matrix.goarch }}
