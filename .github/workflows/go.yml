@@ -12,8 +12,6 @@ jobs:
     strategy: 
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        goos: [linux, darwin, windows]
-        goarch: [amd64, amd64, amd64]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
@@ -24,7 +22,7 @@ jobs:
         go-version: 1.15
 
     - name: Build
-      run: env GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o output/
+      run: go build .
 
     - name: Test
       run: go test -v ./...
@@ -32,4 +30,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: test-artifact
-        path: ./output
+        path: ./go-gh-actions.*
