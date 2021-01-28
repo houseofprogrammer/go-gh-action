@@ -9,7 +9,10 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-latest
+    strategy: 
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
 
@@ -19,7 +22,12 @@ jobs:
         go-version: 1.15
 
     - name: Build
-      run: go build -v ./...
+      run: env GOOS=windows GOARCH=amd64 go build -o build/
 
     - name: Test
       run: go test -v ./...
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: test-artifact
+        path: ./build
