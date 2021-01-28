@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"time"
+
+	"github.com/houseofprogrammer/go-gh-action/cmd"
 )
 
 // Version of package
@@ -19,7 +21,8 @@ func sum(from, to int) int {
 }
 
 func main() {
-	fmt.Println("version", Version)
+	fmt.Println("version in main", Version)
+	fmt.Println("version in root", cmd.GetVersion())
 
 	var s1, s2 int
 
